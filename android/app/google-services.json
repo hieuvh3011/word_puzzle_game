@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1053277938430",
+    "project_id": "puzzle-word-game",
+    "storage_bucket": "puzzle-word-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053277938430:android:ec6e3f527fefd51ef1fbaf",
+        "android_client_info": {
+          "package_name": "com.word_puzzle_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053277938430-539lcse6v0cjplqh2urhfo7s1f02s8rv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.word_puzzle_game",
+            "certificate_hash": "421bb14e790dca768f38d1641f90312ecfa59abc"
+          }
+        },
+        {
+          "client_id": "1053277938430-1rbj3gjk16m4ncqao2qgqlnb66qp48jh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9zwsGA__T5GUc2-IH6lK1f_xLyYCK7G4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053277938430-1rbj3gjk16m4ncqao2qgqlnb66qp48jh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1053277938430-r74ab49b6c2s4h4pdt6o9gfqv5kehvt0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hieuvh.word-puzzle-game"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
