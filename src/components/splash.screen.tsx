@@ -10,9 +10,10 @@ const SplashScreen: React.FC = () => {
   const navigation = useNavigation<Props>();
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Home');
-    });
+      navigation.navigate('Login');
+    }, 2000);
   }, [navigation]);
+
   return (
     <View style={styles.container}>
       <Text>Splash Screen</Text>
