@@ -1,10 +1,11 @@
 import {View, Text, Pressable} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Colors from '@app/utils/colors';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '@app/navigation/type.navigation';
 import {useNavigation} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'Login'>;
 
@@ -13,6 +14,23 @@ const LoginScreen: React.FC = () => {
   const onPressLogin = () => {
     navigation.navigate('Home');
   };
+
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .get()
+      .then(querySnapshot => {
+        console.log('Total users: ', querySnapshot.size);
+
+        querySnapshot.forEach(documentSnapshot => {
+          console.log(
+            'User ID: ',
+            documentSnapshot.id,
+            documentSnapshot.data(),
+          );
+        });
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
