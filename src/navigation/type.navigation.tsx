@@ -6,6 +6,7 @@ export type RootStackParamList = {
   Game: undefined;
   Login: undefined;
   Splash: undefined;
+  Topic: undefined;
 };
 
 export type MessageNavigationProps<T extends keyof RootStackParamList> = {
