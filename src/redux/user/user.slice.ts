@@ -1,7 +1,7 @@
 import {Users} from '@app/entities/users.entities';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {setLoading} from '@app/redux/system/system.slice';
-import {getAllUsers} from '@app/repository/users.repository';
+import {setLoading, setRefreshing} from '@app/redux/system/system.slice';
+import {getAllUsers, getUser} from '@app/repository/users.repository';
 import {Alert} from 'react-native';
 
 export interface UserState {
@@ -15,7 +15,7 @@ const initialState: UserState = {
     id: '',
     username: '',
     fullName: '',
-    score: '',
+    score: 0,
   },
 };
 
@@ -35,6 +35,37 @@ export const fetchListUsers = createAsyncThunk(
   },
 );
 
+export const refreshListUser = createAsyncThunk(
+  'refresh_list_user',
+  async (_, thunkAPI) => {
+    thunkAPI.dispatch(setRefreshing(true));
+    const data: Array<Users> = await getAllUsers().catch(error => {
+      thunkAPI.dispatch(setRefreshing(false));
+      Alert.alert('Error', error.message || 'Getting undefined error');
+      return [];
+    });
+    thunkAPI.dispatch(setRefreshing(false));
+    return data;
+  },
+);
+
+export const refreshCurrentUser = createAsyncThunk(
+  'refresh_current_user',
+  async (user: Users, thunkAPI) => {
+    const data: Users = await getUser(user).catch(error => {
+      thunkAPI.dispatch(setRefreshing(false));
+      Alert.alert('Error', error.message || 'Getting undefined error');
+      return {
+        id: '',
+        fullName: '',
+        username: '',
+        score: 0,
+      };
+    });
+    return data;
+  },
+);
+
 export const userSlice = createSlice({
   name: 'users',
   initialState,
@@ -46,6 +77,12 @@ export const userSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchListUsers.fulfilled, (state, action) => {
       state.listUser = action.payload;
+    });
+    builder.addCase(refreshListUser.fulfilled, (state, action) => {
+      state.listUser = action.payload;
+    });
+    builder.addCase(refreshCurrentUser.fulfilled, (state, action) => {
+      state.userLoggedIn = action.payload;
     });
   },
 });

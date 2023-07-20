@@ -1,20 +1,54 @@
-import {Pressable, Text} from 'react-native';
+import {ActivityIndicator, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {ScaledSheet} from 'react-native-size-matters';
+import {ScaledSheet, verticalScale} from 'react-native-size-matters';
 import AppColors from '@app/utils/colors';
+import Colors from '@app/utils/colors';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface Props {
   onPress: (param: any) => void;
   text: string;
   style?: Object;
   textStyle?: Object;
+  loading?: boolean;
 }
 
-const AppButton: React.FC<Props> = ({text, onPress, style, textStyle}) => {
+const AppButton: React.FC<Props> = ({
+  text,
+  onPress,
+  style,
+  textStyle,
+  loading,
+}) => {
+  const insets = useSafeAreaInsets();
+  if (loading === true) {
+    return (
+      <View
+        style={[
+          styles.container,
+          {marginBottom: insets.bottom + verticalScale(5)},
+          style,
+        ]}>
+        <ActivityIndicator size={'small'} color={Colors.buttonText} />
+      </View>
+    );
+  }
   return (
-    <Pressable style={[styles.container, style]} onPress={onPress}>
+    <TouchableOpacity
+      hitSlop={{
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 10,
+      }}
+      style={[
+        styles.container,
+        {marginBottom: insets.bottom + verticalScale(5)},
+        style,
+      ]}
+      onPress={onPress}>
       <Text style={[styles.text, textStyle]}>{text}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
@@ -25,7 +59,7 @@ const styles = ScaledSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     paddingVertical: '11@vs',
-    marginVertical: '15@vs',
+    marginTop: '5@vs',
     justifyContent: 'center',
     backgroundColor: AppColors.primary,
     borderRadius: '5@ms',

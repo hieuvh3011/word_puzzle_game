@@ -69,8 +69,8 @@ function TopicScreen() {
         />
       </View>
       <AppLoading
-        isLoading={systemSelector.isLoading}
-        text={systemSelector.textLoading}
+        isLoading={systemSelector.loading.isLoading}
+        text={systemSelector.loading.textLoading}
       />
     </View>
   );
@@ -97,7 +97,7 @@ const styles = ScaledSheet.create({
     fontSize: '14@ms',
   },
   button: {
-    backgroundColor: Colors.success,
+    backgroundColor: Colors.blurGreen,
   },
   textButton: {
     color: Colors.text,

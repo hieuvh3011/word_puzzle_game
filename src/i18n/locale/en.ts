@@ -32,5 +32,22 @@ export default {
   game: {
     puzzles: 'Puzzles',
     submit_answer: 'Submit Answer',
+    question: 'Question',
+    reset_answer: 'Reset Answer',
+    or: 'or',
+    your_answer_is_correct: 'Congarulation, your answer is correct',
+    your_answer_is_incorrect: 'Your answer is incorrect, try again next time',
+  },
+  result: {
+    thank_you: 'Thank you for playing this game',
+    your_achievement: 'Here is your achievement',
+    correct: 'Correct',
+    incorrect: 'Incorrect',
+    you_answer_correctly: 'You answered correctly',
+    score: 'Score',
+    point: 'points',
+    your_score_will_be_recorded:
+      'Your score will be recorded in our system. You will see it in the leader board',
+    back_to_home: 'BACK TO HOME',
   },
 };

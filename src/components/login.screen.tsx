@@ -32,14 +32,6 @@ function LoginScreen() {
     thunkDispatch(fetchListUsers());
   }, [thunkDispatch]);
 
-  const _renderEmptyList = () => {
-    return (
-      <View style={styles.container}>
-        <Text>{strings.common.undefined_error}</Text>
-      </View>
-    );
-  };
-
   const _renderButtonLogin = (item: Users, index: number) => {
     return (
       <Pressable
@@ -64,10 +56,9 @@ function LoginScreen() {
         data={userSelector.listUser}
         keyExtractor={item => item.id}
         renderItem={({item, index}) => _renderButtonLogin(item, index)}
-        ListEmptyComponent={_renderEmptyList()}
       />
       <AppLoading
-        isLoading={systemSelector.isLoading}
+        isLoading={systemSelector.loading.isLoading}
         text={strings.login.fetching_user}
       />
     </View>

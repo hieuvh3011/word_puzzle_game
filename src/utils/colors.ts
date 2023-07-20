@@ -9,7 +9,9 @@ const Colors = {
   profilePictureBackground: '#9BCDD2',
   border: '#808080',
   itemBackground: '#FAF0E4',
-  success: '#CCEEBC',
+  blurGreen: '#CCEEBC',
+  success: '#198754',
+  error: '#A91101',
 };
 
 export default Colors;

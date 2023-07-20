@@ -1,4 +1,4 @@
-import {View, Text, FlatList, Pressable} from 'react-native';
+import {View, Text, FlatList, Pressable, RefreshControl} from 'react-native';
 import React from 'react';
 import {ScaledSheet, moderateScale} from 'react-native-size-matters';
 import Colors from '@app/utils/colors';
@@ -7,18 +7,21 @@ import strings from '@app/i18n';
 import AppButton from './common/button.component';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AppAvatar from './common/avatar.component';
-import {useAppSelector} from '@app/redux/hook.redux';
+import {useAppSelector, useAppThunkDispatch} from '@app/redux/hook.redux';
 import {Users} from '@app/entities/users.entities';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@app/navigation/type.navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {refreshCurrentUser, refreshListUser} from '@app/redux/user/user.slice';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const userSelector = useAppSelector(state => state.user);
+  const systemSelector = useAppSelector(state => state.system);
   const navigation = useNavigation<Props>();
+  const thunkDispatch = useAppThunkDispatch();
 
   const _onPressPlayGame = () => {
     navigation.navigate('Topic');
@@ -31,7 +34,10 @@ function HomeScreen() {
   function _renderProfile() {
     return (
       <View style={styles.profile}>
-        <AppAvatar username="hieuvu" bigAvatar={true} />
+        <AppAvatar
+          username={userSelector.userLoggedIn.username}
+          bigAvatar={true}
+        />
         <View style={styles.userInfo}>
           <Text
             style={
@@ -79,6 +85,16 @@ function HomeScreen() {
         style={styles.scoreboardArea}
         renderItem={({item, index}) => _renderScoreBoardItem(item, index)}
         keyExtractor={item => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={systemSelector.isRefreshing}
+            onRefresh={() => {
+              thunkDispatch(refreshListUser());
+              thunkDispatch(refreshCurrentUser(userSelector.userLoggedIn));
+            }}
+          />
+        }
+        showsVerticalScrollIndicator={false}
       />
     );
   }

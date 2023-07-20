@@ -8,6 +8,8 @@ import {getAllTopics} from '@app/repository/topic.repository';
 export interface TopicState {
   listTopic: Array<Topic>;
   selectedTopic: Topic;
+  correctAnswer: number;
+  score: number;
 }
 
 const initialState: TopicState = {
@@ -17,6 +19,8 @@ const initialState: TopicState = {
     name: '',
     puzzles: [],
   },
+  correctAnswer: 0,
+  score: 0,
 };
 
 export const fetchListTopic = createAsyncThunk(
@@ -48,6 +52,18 @@ export const topicSlice = createSlice({
     setTopic: (state, action: PayloadAction<Topic>) => {
       Object.assign(state.selectedTopic, action.payload);
     },
+    increaseCorrectAnswer: state => {
+      state.correctAnswer = state.correctAnswer + 1;
+    },
+    resetCorrectAnswer: state => {
+      state.correctAnswer = 0;
+    },
+    setScore: (state, action: PayloadAction<number>) => {
+      state.score = action.payload;
+    },
+    resetScore: state => {
+      state.score = 0;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchListTopic.fulfilled, (state, action) => {
@@ -56,6 +72,12 @@ export const topicSlice = createSlice({
   },
 });
 
-export const {setTopic} = topicSlice.actions;
+export const {
+  setTopic,
+  increaseCorrectAnswer,
+  resetCorrectAnswer,
+  setScore,
+  resetScore,
+} = topicSlice.actions;
 
 export default topicSlice.reducer;

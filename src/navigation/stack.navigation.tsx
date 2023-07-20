@@ -6,6 +6,7 @@ import GameScreen from '@app/components/game.screen';
 import SplashScreen from '@app/components/splash.screen';
 import {RootStackParamList} from './type.navigation';
 import TopicScreen from '@app/components/topic.screen';
+import ResultScreen from '@app/components/result.screen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -19,6 +20,7 @@ const AppStack: React.FC = () => {
       <Stack.Screen name={'Home'} component={HomeScreen} />
       <Stack.Screen name={'Game'} component={GameScreen} />
       <Stack.Screen name={'Topic'} component={TopicScreen} />
+      <Stack.Screen name={'Result'} component={ResultScreen} />
     </Stack.Navigator>
   );
 };

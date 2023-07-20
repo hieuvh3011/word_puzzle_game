@@ -14,7 +14,6 @@ export const getAllTopics = async (): Promise<Array<Topic>> => {
           name: topic.name,
           puzzles: topic.puzzles,
         };
-        console.log('item result = ', item);
         result.push(item);
       });
     });

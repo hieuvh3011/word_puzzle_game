@@ -89,7 +89,7 @@ const styles = ScaledSheet.create({
     paddingHorizontal: '10@ms',
   },
   text: {
-    fontSize: '15@ms',
+    fontSize: '16@ms',
     color: AppColors.buttonText,
   },
   blankRight: {
